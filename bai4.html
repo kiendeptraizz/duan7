@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Star Rating System</title>
+    <style>
+      .stars ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      .star {
+        font-size: 2em;
+        color: #ddd;
+        display: inline-block;
+        cursor: pointer;
+      }
+      .orange {
+        color: orange;
+      }
+      .output {
+        background-color: #ddd;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="stars">
+      <li class="star">&#10029;</li>
+      <li class="star">&#10029;</li>
+      <li class="star">&#10029;</li>
+      <li class="star">&#10029;</li>
+      <li class="star">&#10029;</li>
+    </ul>
+    <div class="output"></div>
+
+    <script>
+      const starsUL = document.querySelector(".stars"); // lấy phần tử đầu tiên khớp với bộ chọn
+      const output = document.querySelector(".output");
+      const stars = document.querySelectorAll(".star");
+
+      stars.forEach((star, index) => {
+        star.starValue = index + 1; // gán giá trị cho mỗi dấu sao mỗi lần tăng thêm 1 tăng dần
+        star.addEventListener("click", starRate); // thêm sự kiện click
+      });
+      // hàm xử lí ngôi sao được click
+      function starRate(e) {
+        let t = e.target;
+        output.innerHTML = `You Rated this ${t.starValue} stars`; // cập nhật sau mỗi lần click
+        stars.forEach((star, index) => {
+          if (index < t.starValue) {
+            // nếu chỉ  của ngôi sao mà nhỏ hơn giá trị của ngôi sao đc click thì thêm màu cam
+            star.classList.add("orange");
+          } else {
+            star.classList.remove("orange");
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

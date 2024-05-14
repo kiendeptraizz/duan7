@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đặt Hàng</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #e7e7e7;
+        margin: 0;
+        padding: 20px;
+      }
+
+      form {
+        background-color: #f4f4f4;
+        padding: 20px;
+        width: 300px;
+        margin: 20px auto;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      input[type="text"],
+      select {
+        width: calc(100% - 10px);
+        padding: 5px;
+        margin: 5px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+        background-color: #4caf50;
+        color: white;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      input[type="radio"] {
+        margin: 0 5px 0 0;
+      }
+
+      #phi_vc {
+        padding: 5px;
+        margin-top: 5px;
+        background-color: #ddd;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="orderForm" onsubmit="return kiem_tra()">
+      <h2>ĐẶT HÀNG</h2>
+      Sản phẩm: <input type="text" id="san_pham" name="san_pham" /><br />
+      Loại:
+      <select id="loai">
+        <option value="">Chọn loại</option>
+        <option value="loai1">Loại 1</option>
+        <option value="loai2">Loại 2</option></select
+      ><br />
+      Đơn giá: <input type="text" id="don_gia" name="don_gia" /><br />
+      Nơi nhận hàng:
+      <input type="radio" name="dia_chi" onclick="hien_thi(false)" />Nội thành
+      <input type="radio" name="dia_chi" onclick="hien_thi(true)" />Ngoại
+      thành<br />
+      <div id="phi_vc" style="display: none">Phí vận chuyển: 100000</div>
+      <input type="submit" value="Đặt mua" />
+    </form>
+
+    <script>
+      function hien_thi(visible) {
+        document.getElementById("phi_vc").style.display = visible
+          ? "block" // nếu visible là đúng
+          : "none";
+      } // ẩn hoặc hiện phí khi người mua ở  ngoại thành hoặc nội thành
+
+      function kiem_tra() {
+        var sp = document.getElementById("san_pham");
+        if (sp.value.length == 0) {
+          alert("Vui lòng nhập tên sản phẩm!");
+          return false;
+        }
+        var gia = document.getElementById("don_gia");
+        if (isNaN(gia.value) || parseFloat(gia.value) <= 0) {
+          alert("Vui lòng nhập số dương!");
+          return false;
+        }
+        var loai = document.getElementById("loai");
+        if (loai.value.length == 0) {
+          alert("Vui lòng chọn loại sản phẩm!");
+          return false;
+        }
+        var radios = document.getElementsByName("dia_chi");
+        if (!radios[0].checked && !radios[1].checked) {
+          // kiêmr tra xem ng dung đã ấn nút nôij thành hay ngoại thành hay ch
+          alert("Vui lòng chọn nơi nhận hàng!");
+          return false;
+        }
+        alert("Chúc mừng bạn đã nhập đúng!");
+        return true;
+      }
+    </script>
+  </body>
+</html>

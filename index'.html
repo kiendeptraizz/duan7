@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drag & Drop Demo</title>
+    <style>
+      .container {
+        width: 300px;
+        border: 1px solid black;
+      }
+      .box {
+        border: 1px solid black;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+      }
+      .box.draggable {
+        border-style: dashed;
+        border-width: 2px;
+      }
+      .drag-placeholder {
+        background-color: #f3f3f3;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="box1" class="box draggable" draggable="true">
+        Drag Me Please!
+      </div>
+      <div id="box2" class="box"></div>
+    </div>
+
+    <script>
+      var draggables = document.querySelectorAll(".draggable"); // tìm ra tất cả các phần tử chứa nó
+
+      draggables.forEach((draggable) => {
+        draggable.addEventListener("dragstart", function (event) {
+          // đăng kí 1 sự kiện lắng nghe
+          event.dataTransfer.setData("text/plain", event.target.id);
+          setTimeout(() => {
+            // thiết lập dữ liệu được kéo
+            event.target.classList.add("drag-placeholder");
+          }, 0); // cài đặt thời gian với thời gian đợi là 0
+        });
+        draggable.addEventListener("dragend", function (event) {
+          // đăng kí 1 sự kiện lắng nghe
+          event.target.classList.remove("drag-placeholder");
+        }); // loại bỏ
+      });
+
+      var containers = document.querySelectorAll(".box");
+
+      containers.forEach((container) => {
+        container.addEventListener("dragover", function (event) {
+          event.preventDefault();
+          event.dataTransfer.dropEffect = "move"; // đặt thành move
+        });
+        container.addEventListener("drop", function (event) {
+          // đăng kí sự kiện lắng nghe
+          event.preventDefault(); // ngăn sự kiện khác k xảy ra
+          var data = event.dataTransfer.getData("text/plain"); // truy xuất dữ liêuj
+          var draggedElement = document.getElementById(data); // sử dụng id để tìm phần tử
+          if (container.id !== draggedElement.id) {
+            // kiểm tra phần tử đc kéo chắc chắn kp là đích
+            container.parentElement.insertBefore(
+              // phần tử dcd kéo chèn vào phần tử tiếp theo
+              draggedElement,
+              container.nextSibling
+            );
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

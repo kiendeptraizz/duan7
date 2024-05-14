@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Another Page</title>
+  </head>
+  <body>
+    <h1>Form Data Received</h1>
+    <div id="formData"></div>
+    <script>
+      let q = window.location.search;
+      let params = new URLSearchParams(q);
+      let formDataDiv = document.getElementById("formData");
+
+      let firstName = params.get("fname");
+      let lastName = params.get("lname");
+      let age = params.get("age");
+
+      formDataDiv.innerHTML = `<p>First Name: ${firstName}</p>
+                                 <p>Last Name: ${lastName}</p>
+                                 <p>Age: ${age}</p>`;
+    </script>
+  </body>
+</html>

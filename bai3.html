@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Submission</title>
+  </head>
+  <body>
+    <form action="anotherpage.html" method="get">
+      <label for="fname">First name:</label><br />
+      <input type="text" id="fname" name="fname" /><br />
+      <label for="lname">Last name:</label><br />
+      <input type="text" id="lname" name="lname" /><br />
+      <label for="age">Age:</label><br />
+      <input type="text" id="age" name="age" /><br /><br />
+      <input type="submit" value="Submit" />
+    </form>
+    <script>
+      // Khi trang được tải, lấy query string từ URL
+      let q = window.location.search; // trả về string của url
+      // Sử dụng URLSearchParams để dễ dàng truy cập các tham số
+      let params = new URLSearchParams(q); // dễ dàng truy xuất
+
+      // Xử lý từng cặp key-value trong query string
+      for (let p of params) {
+        // dùng vòng lặp để hiển  thị chi tiết của tham số
+        console.log(p);
+        alert(p);
+      }
+
+      // Có thể lấy ra từng giá trị cụ thể nếu bạn biết tên tham số
+      let firstName = params.get("fname"); // lấy ra từng thâm số cụ thể
+      let lastName = params.get("lname");
+      let age = params.get("age");
+
+      // Hiển thị hoặc xử lý các giá trị này như mong muốn
+      console.log(
+        `First Name: ${firstName}, Last Name: ${lastName}, Age: ${age}` // nối chuỗi và biến hiển thị ra các thông tin cuj thể
+      );
+      alert(`First Name: ${firstName}, Last Name: ${lastName}, Age: ${age}`);
+    </script>
+  </body>
+</html>

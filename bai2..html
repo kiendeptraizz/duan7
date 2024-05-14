@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <style>
+      div {
+        background-color: purple;
+        width: 100px;
+        height: 100px;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="toTheRight()">Go right</button>
+    <div id="block"></div>
+
+    <script>
+      function toTheRight() {
+        let b = document.getElementById("block"); // lấy phần tử div
+        let x = 0; // khởi tạo biến cập nhật và theo dõi vị trí của nó theo chiều nganh
+        // Lưu id của setInterval để có thể xóa sau này
+        let intervalId = setInterval(function () {
+          // taoj hàm đc lặp lại mỗi 2 mili s
+          if (x >= 600) {
+            // kiểm tra xem x đã đạt 600 hay ch
+            clearInterval(intervalId); // nếu đã 600 thì dừng lại
+          } else {
+            x++;
+            b.style.left = x + "px"; // ch đủ 600 thì cập nhật nó thêm 1 px
+          }
+        }, 2);
+      }
+    </script>
+  </body>
+</html>
